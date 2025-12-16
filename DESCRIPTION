@@ -1,7 +1,7 @@
 Package: IBLM
 Type: Package
 Title: Interpretable Boosted Linear Models
-Version: 1.0.1
+Version: 1.0.2
 Authors@R: c(
     person("Karol", "Gawlowski", , "Karol.Gawlowski@citystgeorges.ac.uk", role = c("aut", "cre", "cph")),
     person("Paul", "Beard", , "paul.beard.actuarial@gmail.com", role = "aut")
@@ -13,16 +13,17 @@ LazyData: true
 Depends: R (>= 4.1.0)
 RoxygenNote: 7.3.0
 Imports: cli, dplyr, fastDummies, ggExtra, ggplot2, purrr, scales,
-        statmod, stats, utils, withr, xgboost
-Suggests: testthat (>= 3.0.0)
+        statmod, stats, utils, withr, xgboost (>= 3.1.2.1)
+Suggests: knitr, rmarkdown, testthat (>= 3.0.0), gt, patchwork
+VignetteBuilder: knitr
 Config/testthat/edition: 3
 URL: https://ifoa-adswp.github.io/IBLM/,
         https://github.com/IFoA-ADSWP/IBLM
 BugReports: https://github.com/IFoA-ADSWP/IBLM/issues
 NeedsCompilation: no
-Packaged: 2025-11-15 20:02:43 UTC; paulb
+Packaged: 2025-12-16 20:16:35 UTC; paulb
 Author: Karol Gawlowski [aut, cre, cph],
   Paul Beard [aut]
 Maintainer: Karol Gawlowski <Karol.Gawlowski@citystgeorges.ac.uk>
 Repository: CRAN
-Date/Publication: 2025-11-19 19:50:25 UTC
+Date/Publication: 2025-12-16 20:50:02 UTC

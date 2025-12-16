@@ -18,7 +18,7 @@
 #'   df_list,
 #'   response_var = "ClaimRate",
 #'   family = "poisson",
-#'   max_depth = 6,
+#'   params = list(max_depth = 6),
 #'   nrounds = 1000
 #' )
 #'
@@ -29,7 +29,7 @@
 #'   df_list,
 #'   response_var = "ClaimRate",
 #'   family = "poisson",
-#'   max_depth = 1,
+#'   params = list(max_depth = 1),
 #'   nrounds = 5
 #' )
 #'
@@ -79,23 +79,23 @@ train_xgb_as_per_iblm <- function(iblm_model, ...) {
 
   # ==================== Preparing for XGB  ====================
 
-  train$xgb_matrix <- xgboost::xgb.DMatrix(data.matrix(train$features), label = train$targets)
-  validate$xgb_matrix <- xgboost::xgb.DMatrix(data.matrix(validate$features), label = validate$targets)
+  train$xgb_matrix <- xgboost::xgb.DMatrix(train$features, label = train$targets)
+  validate$xgb_matrix <- xgboost::xgb.DMatrix(validate$features, label = validate$targets)
 
 
   # ==================== Fitting XGB  ====================
 
   xgb_params <- iblm_model$xgb_params
 
-  if (is.null(xgb_params[["watchlist"]])) {
-    xgb_params[["watchlist"]] <- list()
+  if (is.null(xgb_params[["evals"]])) {
+    xgb_params[["evals"]] <- list()
   }
 
   xgb_params <- utils::modifyList(xgb_params, list(...))
 
   xgb_params <- utils::modifyList(xgb_params, list(data = train$xgb_matrix))
 
-  xgb_params[["watchlist"]] <- utils::modifyList(xgb_params[["watchlist"]], list(validation = validate$xgb_matrix))
+  xgb_params[["evals"]] <- utils::modifyList(xgb_params[["evals"]], list(validation = validate$xgb_matrix))
 
   booster_model <- do.call(xgboost::xgb.train, xgb_params)
 
